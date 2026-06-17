@@ -11,6 +11,17 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
+    <!-- Sửa lỗi JSX Runtime: Ép Babel sử dụng cấu hình 'classic' thay vì 'automatic' -->
+    <script>
+        if (window.Babel) {
+            Babel.registerPreset('react-classic', {
+                presets: [
+                    [Babel.availablePresets['react'], { runtime: 'classic' }]
+                ]
+            });
+        }
+    </script>
+    
     <style>
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
@@ -75,7 +86,8 @@
 <body class="bg-slate-50 text-slate-800">
     <div id="root"></div>
 
-    <script type="text/babel">
+    <!-- Sử dụng preset 'react-classic' vừa cấu hình để Babel biên dịch ra React.createElement thay vì import -->
+    <script type="text/babel" data-presets="react-classic">
         const { useState, useEffect, useRef } = React;
 
         const translations = {
@@ -521,6 +533,3 @@
     </script>
 </body>
 </html>
-
-
-
